@@ -3,8 +3,8 @@ import random
 
 class Grid(object):
     """docstring for grid."""
-    def __init__(self, mines):
-        self.size = 8
+    def __init__(self, size, mines):
+        self.size = size
         self.mines = mines
         self.grid = [[Square((i,j)) for j in range(self.size)] for i in range(self.size)]
 
@@ -35,33 +35,30 @@ class Grid(object):
                             continue
 
     def reveal(self):
-        print '''
-        |_____|__0__|__1__|__2__|__3__|__4__|__5__|__6__|__7__|'''
-
-        print_row = '''
-        |__{}__|  {}  |  {}  |  {}  |  {}  |  {}  |  {}  |  {}  |  {}  |'''
+        top_row = [str(i) for i in range(self.size)]
+        ptop = "__|__".join(top_row)
+        print "\t|_____|__" + ptop + "__|\n"
 
         for row in self.grid:
+            pcol = "\t|__" + str(row[0].row) + "__|  "
             prow = []
-            prow.append(row[0].row)
             for square in row:
                 if square.mine:
                     prow.append("*")
                 else:
                     prow.append(square.number)
-            trow = tuple(prow)
-            print print_row.format(*trow)
+            pprow = [str(q) for q in prow]
+            trow = tuple(pprow)
+            print pcol + "  |  ".join(pprow) + "  |\n"
 
     def print_grid(self):
-        print '''
-        |_____|__0__|__1__|__2__|__3__|__4__|__5__|__6__|__7__|'''
-
-        print_row = '''
-        |__{}__|  {}  |  {}  |  {}  |  {}  |  {}  |  {}  |  {}  |  {}  |'''
+        top_row = [str(i) for i in range(self.size)]
+        ptop = "__|__".join(top_row)
+        print "\t|_____|__" + ptop + "__|\n"
 
         for row in self.grid:
+            pcol = "\t|__" + str(row[0].row) + "__|  "
             prow = []
-            prow.append(row[0].row)
             for square in row:
                 if square.display:
                     if square._flagged:
@@ -70,8 +67,9 @@ class Grid(object):
                         prow.append(square.number)
                 else:
                     prow.append(" ")
-            trow = tuple(prow)
-            print print_row.format(*trow)
+            pprow = [str(q) for q in prow]
+            trow = tuple(pprow)
+            print pcol + "  |  ".join(pprow) + "  |\n"
 
     def click(self, cell):
         i = cell[0]

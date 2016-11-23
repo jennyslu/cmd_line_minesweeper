@@ -2,13 +2,14 @@ from grid import Grid
 
 class Minesweeper(object):
     """docstring for minesweeper."""
-    def __init__(self, mines):
+    def __init__(self, size, mines):
         self.over = False
+        self.size = size
         self.mines = mines
-        self.grid = Grid(self.mines)
+        self.grid = Grid(self.size, self.mines)
 
     def play(self):
-        self.grid = Grid(self.mines)
+        # self.grid = Grid(self.size, self.mines)
         self.mine_locs = self.grid.set_mines()
         self.grid.set_numbers()
         self.grid.reveal()
@@ -42,6 +43,7 @@ class Minesweeper(object):
 
 
 if __name__ == '__main__':
+    bigness = int(raw_input("How big of a grid do you want? "))
     difficulty = int(raw_input("Number of mines? "))
-    game = Minesweeper(difficulty)
+    game = Minesweeper(bigness, difficulty)
     game.play()
