@@ -21,3 +21,7 @@ class Square(object):
     def flagged(self):
         self._flagged = True
         self.display = True
+
+    def unflagged(self):
+        self._flagged = False
+        self.display = False

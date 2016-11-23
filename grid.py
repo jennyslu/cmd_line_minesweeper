@@ -62,7 +62,7 @@ class Grid(object):
             for square in row:
                 if square.display:
                     if square._flagged:
-                        prow.append("f")
+                        prow.append("F")
                     else:
                         prow.append(square.number)
                 else:
@@ -90,3 +90,8 @@ class Grid(object):
         i = cell[0]
         j = cell[1]
         self.grid[i][j].flagged()
+
+    def unflag(self, cell):
+        i = cell[0]
+        j = cell[1]
+        self.grid[i][j].unflagged()

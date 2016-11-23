@@ -18,14 +18,23 @@ class Minesweeper(object):
         while not self.over:
             self.click_type = raw_input("Flag or click? F for flag, anything else for click ")
             if self.click_type == "F":
+                print "Flag"
                 self.chosen = self.ask_position()
-                self.grid.flag(self.chosen)
-                self.flagged_cells.append(self.chosen)
-                if self.flagged_cells == self.mine_locs:
-                    self.over = True
-                    print "You found them all! You win!"
-                    self.grid.reveal()
-                    return None
+                print self.chosen
+                if self.chosen in self.flagged_cells:
+                    "Unflag cell"
+                    self.grid.unflag(self.chosen)
+                else:
+                    self.flagged_cells.append(self.chosen)
+                    "Flag cell"
+                    self.grid.flag(self.chosen)
+                    #check if you've won
+                    if self.flagged_cells == self.mine_locs:
+                        print "Check"
+                        self.over = True
+                        print "You found them all! You win!"
+                        self.grid.reveal()
+                        return None
             else:
                 self.chosen = self.ask_position()
                 if self.chosen in self.mine_locs:
